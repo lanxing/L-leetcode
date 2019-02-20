@@ -61,6 +61,26 @@
  */
 class Solution {
     public int removeDuplicates(int[] nums) {
-        
+        if (nums == null){
+            return 0;
+        }
+        int len = nums.length;
+        if (len <= 1){
+            return len;
+        }
+        int i = 0;
+        int j = i + 1;
+        while (j < len){
+            if (nums[j] == nums[i]){
+                ++j;
+                continue;
+            }
+            if (++i != j) {
+                nums[i] = nums[j];
+            }
+            ++j;
+        }
+        return i + 1;
+
     }
 }

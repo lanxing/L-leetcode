@@ -33,6 +33,49 @@
  */
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        
+        int left = bsearchL(nums, target, 0, nums.length - 1);
+        int right = bsearchR(nums, target, 0, nums.length - 1);
+        return new int[]{left, right};
+    }
+
+    private int bsearchL(int[] nums, int target, int left, int right){
+        if (left > right){
+            return -1;
+        }
+        int mid = (left + right) / 2;
+        if (nums[mid] == target){
+            if (mid == 0){
+                return mid;
+            }
+            if (nums[mid] != nums[mid - 1]){
+                return mid;
+            }
+            return bsearchL(nums, target, left, mid - 1);
+        }
+        if (nums[mid] < target){
+            return bsearchL(nums, target, mid + 1, right);
+        }else {
+            return bsearchL(nums, target, left, mid - 1);
+        }
+    }
+    private int bsearchR(int[] nums, int target, int left, int right){
+        if (left > right){
+            return -1;
+        }
+        int mid = (left + right) / 2;
+        if (nums[mid] == target){
+            if (mid == nums.length - 1){
+                return mid;
+            }
+            if (nums[mid] != nums[mid + 1]){
+                return mid;
+            }
+            return bsearchR(nums, target, mid + 1, right);
+        }
+        if (nums[mid] < target){
+            return bsearchR(nums, target, mid + 1, right);
+        }else {
+            return bsearchR(nums, target, left, mid - 1);
+        }
     }
 }

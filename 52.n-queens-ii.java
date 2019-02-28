@@ -3,16 +3,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
- * @lc app=leetcode id=51 lang=java
+ * @lc app=leetcode id=52 lang=java
  *
- * [51] N-Queens
+ * [52] N-Queens II
  *
- * https://leetcode.com/problems/n-queens/description/
+ * https://leetcode.com/problems/n-queens-ii/description/
  *
  * algorithms
- * Hard (37.49%)
- * Total Accepted:    128.6K
- * Total Submissions: 342.3K
+ * Hard (50.53%)
+ * Total Accepted:    92.6K
+ * Total Submissions: 182.8K
  * Testcase Example:  '4'
  *
  * The n-queens puzzle is the problem of placing n queens on an n×n chessboard
@@ -20,50 +20,45 @@ import java.util.List;
  * 
  * 
  * 
- * Given an integer n, return all distinct solutions to the n-queens puzzle.
- * 
- * Each solution contains a distinct board configuration of the n-queens'
- * placement, where 'Q' and '.' both indicate a queen and an empty space
- * respectively.
+ * Given an integer n, return the number of distinct solutions to the n-queens
+ * puzzle.
  * 
  * Example:
  * 
  * 
  * Input: 4
- * Output: [
- * ⁠[".Q..",  // Solution 1
- * ⁠ "...Q",
- * ⁠ "Q...",
- * ⁠ "..Q."],
+ * Output: 2
+ * Explanation: There are two distinct solutions to the 4-queens puzzle as
+ * shown below.
+ * [
+ * [".Q..",  // Solution 1
+ * "...Q",
+ * "Q...",
+ * "..Q."],
  * 
- * ⁠["..Q.",  // Solution 2
- * ⁠ "Q...",
- * ⁠ "...Q",
- * ⁠ ".Q.."]
+ * ["..Q.",  // Solution 2
+ * "Q...",
+ * "...Q",
+ * ".Q.."]
  * ]
- * Explanation: There exist two distinct solutions to the 4-queens puzzle as
- * shown above.
  * 
  * 
  */
 class Solution {
-    public List<List<String>> solveNQueens(int n) {
-        List<List<String>> result = new ArrayList<>();
+    public int totalNQueens(int n) {
         List<String> tmp = new ArrayList<>();
-        backTracing(n, tmp, result, 0);
-        return result;
+        return backTracing(n, tmp, 0, 0);
     }
-
-    public void backTracing(int n, List<String> tmp, List<List<String>> result, int column){
+    public int backTracing(int n, List<String> tmp, int total, int column){
 
         if (tmp.size() == n) {
             if (isValid(tmp, column)) {
-                result.add(new ArrayList<>(tmp));
+                return total + 1;
             }
-            return;
+            return total;
         }
         if (!isValid(tmp, column)){
-            return;
+            return total;
         }
 
         char[] chars = new char[n];
@@ -71,10 +66,11 @@ class Solution {
         for (int i = 0; i < n; ++i){
             chars[i] = 'Q';
             tmp.add(new String(chars));
-            backTracing(n, tmp, result, i);
+            total = backTracing(n, tmp, total, i);
             chars[i] = '.';
             tmp.remove(tmp.size() - 1);
         }
+        return total;
     }
 
     public boolean isValid(List<String> queneList, int column){

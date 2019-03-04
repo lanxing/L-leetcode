@@ -56,7 +56,41 @@ import java.util.Set;
  */
 class Solution {
     public String getPermutation(int n, int k) {
-        return firstSoluton(n, k);
+        return secondSoluton(n, k);
+    }
+
+    /**
+     * 根据k获取每一位的位置
+     * @param n
+     * @param k
+     * @return
+     */
+    private String secondSoluton(int n, int k){
+        int totalSum = 1;
+        List<Integer> unUsedList = new ArrayList<>();
+        for (int i = 1; i <= n; ++i){
+            totalSum *= i;
+            unUsedList.add(i);
+        }
+        int sortPos;
+        int start;
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = n; i >= 1; --i){
+            totalSum /= i;
+            if (k % totalSum != 0){
+                start = k / totalSum * totalSum;
+                sortPos = k / totalSum + 1;
+            }else {
+                start = (k / totalSum - 1) * totalSum;
+                sortPos = k / totalSum;
+            }
+            builder.append(unUsedList.get(sortPos - 1));
+            unUsedList.remove(sortPos - 1);
+            //下一位按照从小到大排序的位置
+            k -= start;
+        }
+        return builder.toString();
     }
 
     private String firstSoluton(int n, int k){

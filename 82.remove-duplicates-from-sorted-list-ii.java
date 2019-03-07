@@ -39,6 +39,41 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode tmpHead = head;
+        ListNode tmp;
+        while (tmpHead.next != null && tmpHead.val == tmpHead.next.val){
+            tmp = tmpHead.next;
+            while (tmp != null && tmp.val == tmpHead.val){
+                tmp = tmp.next;
+            }
+            if (tmp == null){
+                return null;
+            }
+            tmpHead = tmp;
+        }
+        head = tmpHead;
+        if (head.next == null){
+            return head;
+        }
+        int count = 1;
+        ListNode first, second;
+        while (tmpHead != null && tmpHead.next != null){
+            first = tmpHead.next;
+            second = first.next;
+            count = 1;
+            while (second != null && second.val == first.val){
+                count++;
+                second = second.next;
+            }
+            if (count == 1){
+                tmpHead = first;
+            }else {
+                tmpHead.next = second;
+            }
+        }
+        return head;
     }
 }

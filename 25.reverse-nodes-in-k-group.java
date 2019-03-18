@@ -44,8 +44,8 @@ class Solution {
         int s = 1;
         ListNode newHead = head;
         ListNode first = head;
-        ListNode preFirst = head;
-        ListNode secondNext = head;
+        ListNode preFirst = head;   //first指针的前一个指针
+        ListNode secondNext = head; //second指针的后一个指针
         ListNode second = first;
         while (second != null){
             second = first;
@@ -75,6 +75,11 @@ class Solution {
         return newHead;
     }
 
+    /**
+     * 逆转一段指针
+     * @param head
+     * @param tail
+     */
     public void reverse(ListNode head, ListNode tail){
         ListNode pre = head;
         ListNode cur = head.next;

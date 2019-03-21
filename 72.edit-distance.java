@@ -42,7 +42,7 @@
  * exention -> exection (将 'n' 替换为 'c')
  * exection -> execution (插入 'u')
  * 
- * 
+ * http://www.cnblogs.com/grandyang/p/4344107.html
  */
 class Solution {
     public int minDistance(String word1, String word2) {

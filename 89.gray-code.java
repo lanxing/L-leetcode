@@ -1,57 +1,75 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /*
- * @lc app=leetcode id=89 lang=java
+ * @lc app=leetcode.cn id=89 lang=java
  *
- * [89] Gray Code
+ * [89] 格雷编码
  *
- * https://leetcode.com/problems/gray-code/description/
+ * https://leetcode-cn.com/problems/gray-code/description/
  *
  * algorithms
- * Medium (44.86%)
- * Total Accepted:    127.1K
- * Total Submissions: 282.7K
+ * Medium (62.96%)
+ * Total Accepted:    4.7K
+ * Total Submissions: 7.5K
  * Testcase Example:  '2'
  *
- * The gray code is a binary numeral system where two successive values differ
- * in only one bit.
+ * 格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。
  * 
- * Given a non-negative integer n representing the total number of bits in the
- * code, print the sequence of gray code. A gray code sequence must begin with
- * 0.
+ * 给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。格雷编码序列必须以 0 开头。
  * 
- * Example 1:
+ * 示例 1:
  * 
- * 
- * Input: 2
- * Output: [0,1,3,2]
- * Explanation:
+ * 输入: 2
+ * 输出: [0,1,3,2]
+ * 解释:
  * 00 - 0
  * 01 - 1
  * 11 - 3
  * 10 - 2
  * 
- * For a given n, a gray code sequence may not be uniquely defined.
- * For example, [0,2,3,1] is also a valid gray code sequence.
+ * 对于给定的 n，其格雷编码序列并不唯一。
+ * 例如，[0,2,3,1] 也是一个有效的格雷编码序列。
  * 
  * 00 - 0
  * 10 - 2
  * 11 - 3
  * 01 - 1
  * 
+ * 示例 2:
  * 
- * Example 2:
+ * 输入: 0
+ * 输出: [0]
+ * 解释: 我们定义格雷编码序列必须以 0 开头。
+ * 给定编码总位数为 n 的格雷编码序列，其长度为 2^n。当 n = 0 时，长度为 2^0 = 1。
+ * 因此，当 n = 0 时，其格雷编码序列为 [0]。
  * 
  * 
- * Input: 0
- * Output: [0]
- * Explanation: We define the gray code sequence to begin with 0.
- * A gray code sequence of n has size = 2^n, which for n = 0 the size is 2^0 =
- * 1.
- * Therefore, for n = 0 the gray code sequence is [0].
- * 
- * http://www.cnblogs.com/grandyang/p/4315649.html
  */
 class Solution {
     public List<Integer> grayCode(int n) {
-        
+        String[] results = new String[(int) Math.pow(2, n)];
+        List<Integer> result = new ArrayList<>();
+        if (n == 0){
+            result.add(0);
+            return result;
+        }
+        results[0] = "0";
+        results[1] = "1";
+        int len;
+        for (int i = 2; i <= n; ++i){
+            len = (int) Math.pow(2, i - 1);
+            int j  = 0;
+            while (j < len){
+                results[2 * len - 1 - j] = "1" + results[j];
+                results[j] = "0" + results[j];
+                ++j;
+            }
+        }
+        for (String str : results){
+            result.add(Integer.valueOf(str, 2));
+        }
+
+        return result;
     }
 }

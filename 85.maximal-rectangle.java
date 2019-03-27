@@ -1,31 +1,28 @@
 /*
- * @lc app=leetcode id=85 lang=java
+ * @lc app=leetcode.cn id=85 lang=java
  *
- * [85] Maximal Rectangle
+ * [85] 最大矩形
  *
- * https://leetcode.com/problems/maximal-rectangle/description/
+ * https://leetcode-cn.com/problems/maximal-rectangle/description/
  *
  * algorithms
- * Hard (32.29%)
- * Total Accepted:    112.3K
- * Total Submissions: 346.1K
+ * Hard (41.28%)
+ * Total Accepted:    2.8K
+ * Total Submissions: 6.8K
  * Testcase Example:  '[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]'
  *
- * Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle
- * containing only 1's and return its area.
+ * 给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
  * 
- * Example:
+ * 示例:
  * 
- * 
- * Input:
+ * 输入:
  * [
  * ⁠ ["1","0","1","0","0"],
  * ⁠ ["1","0","1","1","1"],
  * ⁠ ["1","1","1","1","1"],
  * ⁠ ["1","0","0","1","0"]
  * ]
- * Output: 6
- * 
+ * 输出: 6
  * 
  */
 class Solution {

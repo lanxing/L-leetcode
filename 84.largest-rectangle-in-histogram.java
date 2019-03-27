@@ -39,7 +39,7 @@ import java.util.Stack;
  */
 class Solution {
     public int largestRectangleArea(int[] heights) {
-        return solution2(heights);
+        return solution1(heights);
     }
 
     /**

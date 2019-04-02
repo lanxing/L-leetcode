@@ -68,9 +68,35 @@
  *     TreeNode right;
  *     TreeNode(int x) { val = x; }
  * }
+ * 利用中序遍历找出交换的节点
  */
 class Solution {
+    private TreeNode lastOne = new TreeNode(Integer.MIN_VALUE);
+    private TreeNode first;
+    private TreeNode second;
+
     public void recoverTree(TreeNode root) {
-        
+        solution1(root);
+        int tmp = first.val;
+        first.val = second.val;
+        second.val = tmp;
+    }
+
+
+    public void solution1(TreeNode root){
+        if (root == null){
+            return;
+        }
+        solution1(root.left);
+        // 如果first节点未找到，且前一节点值大于当前节点值，说明找到第一个破坏规则的节点位置，即preElement
+        if (first == null && lastOne.val > root.val){
+            first = lastOne;
+        }
+        // first节点已找到，且前一节点值大于当前节点值，找到第二个破坏规则的节点位置，即root
+        if (first != null && lastOne.val > root.val){
+            second = root;
+        }
+        lastOne = root;
+        solution1(root.right);
     }
 }

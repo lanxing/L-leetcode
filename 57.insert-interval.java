@@ -57,6 +57,7 @@ class Solution {
         int end = newInterval.end;
         int sStart, sEnd;
         boolean insertSuccess = false;
+        //{}表示要插入的区间,[]遍历的区间
         for (Interval interval : intervals){
             if (insertSuccess){
                 result.add(interval);

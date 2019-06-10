@@ -55,31 +55,26 @@ class Solution {
         if (head == null || head.next == null){
             return head;
         }
+
+        ListNode newHead = new ListNode(Integer.MIN_VALUE);
+
         ListNode cur = head;
-        ListNode newHead = head;
+        ListNode pre = newHead, next;
+
         while (cur != null){
-            ListNode tmp = cur.next;
-            if (tmp == null){
-                break;
+            next = cur.next;
+            if (cur.val < pre.val){
+                pre = newHead;
             }
-            if (tmp.val <= newHead.val){
-                cur.next = tmp.next;
-                tmp.next = newHead;
-                newHead = tmp;
-            }else {
-                ListNode newHeadTmp = newHead;
-                while (newHeadTmp.next != null &&  newHeadTmp.next != tmp && newHeadTmp.next.val <= tmp.val){
-                    newHeadTmp = newHeadTmp.next;
-                }
-                if (newHeadTmp.next != null && newHeadTmp.next != tmp){
-                    cur.next = tmp.next;
-                    tmp.next = newHeadTmp.next;
-                    newHeadTmp.next = tmp;
-                }else {
-                    cur = cur.next;
-                }
+            while (pre.next != null && pre.next.val < cur.val){
+                pre = pre.next;
             }
+            cur.next = pre.next;
+            pre.next = cur;
+            pre = newHead;
+            cur = next;
         }
-        return newHead;
+
+        return newHead.next;
     }
 }

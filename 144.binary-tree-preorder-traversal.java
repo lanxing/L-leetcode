@@ -42,6 +42,10 @@ import java.util.*;
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
+        return preorderTraversalFirst(root);
+    }
+
+    public List<Integer> preorderTraversalFirst(TreeNode root){
         Stack<TreeNode> treeNodes = new Stack<>();
         List<Integer> result = new ArrayList<>();
         if (root == null){

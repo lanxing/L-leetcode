@@ -36,7 +36,7 @@ import java.util.List;
  * 你可以假设数组中所有元素都是非负整数，且数值在 32 位有符号整数范围内。
  * 请尝试在线性时间复杂度和空间复杂度的条件下解决此问题。
  * 
- * 
+ * http://nfeng.cc/2016/03/15/maximum-gap-problem/
  */
 class Solution {
     public int maximumGap(int[] nums) {
@@ -54,26 +54,45 @@ class Solution {
                 min = num;
             }
         }
-
-        List<List<Integer>> tmp = new ArrayList<>();
-        for (int i = min; i <= max; ++i){
+        if (len == 2 || max - min < 1){
+            return max - min;
+        }
+        //每个桶中数据间隔
+        int interval = (max - min) / (len - 1);
+        if (interval == 0){
+            interval = 1;
+        }
+        //桶个数
+        int buckNum = (max - min) / interval + 1;
+        List<List<Integer>> tmp = new ArrayList<>(buckNum);
+        for (int i = 0; i < buckNum; ++i){
             tmp.add(new ArrayList<>());
         }
         for (int num : nums){
-            tmp.get(num - min).add(num);
-        }
-        int result = 0;
-        int first = 0;
-        for (int i = 0; i < tmp.size(); ++i){
-            if (tmp.get(i).size() == 0){
-                continue;
-            }else if (first == 0){
-                first = i;
-            }else {
-                result = Math.max(result, i - first);
-                first = i;
+            int index = (num - min) / interval;
+            List<Integer> bucket = tmp.get(index);
+            if (bucket.size() == 0){
+                bucket.add(num);
+                bucket.add(num);
+            }else if (bucket.get(0) < num){
+                bucket.set(0, num);
+            }else if (bucket.get(1) > num){
+                bucket.set(1, num);
             }
         }
-        return result;
+
+        int maxInterval = Integer.MIN_VALUE;
+        int first = -1;
+        for (List<Integer> bucket : tmp){
+            if (bucket.size() == 0){
+                continue;
+            }else if (first == -1){
+                first = bucket.get(0);
+            }else {
+                maxInterval = Math.max(maxInterval, bucket.get(1) - first);
+                first = bucket.get(0);
+            }
+        }
+        return maxInterval;
     }
 }

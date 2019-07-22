@@ -32,7 +32,24 @@
  * 
  */
 class Solution {
+
     public boolean isPowerOfTwo(int n) {
+        if (n == 1){
+            return true;
+        }
+        if (n < 0){
+            return false;
+        }
+        while (n != 0){
+            if ((n & 1) == 1){
+                break;
+            }
+            n = n >>> 1;
+        }
+        return n == 1;
+    }
+
+    public boolean isPowerOfTwo1(int n) {
         if (n <= 0){
             return false;
         }

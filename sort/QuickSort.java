@@ -33,5 +33,5 @@ public class QuickSort {
 		int tmp = nums[i];
 		nums[i] = nums[j];
 		nums[j] = tmp;
-	}
+	}rewst
 }
